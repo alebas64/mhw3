@@ -1,5 +1,6 @@
 
 function onResponse(response) {
+    //console.log(response);
     return response.json();
 }
 
@@ -29,6 +30,7 @@ function token_kitsu(){
         fetch(api_outh2,requestOptions)
             .then(onResponse)
             .then(result => {
+                //console.log(result);
                 header.append("Authorizazion", "Bearer "+result.access_token);
                 getInfo();
             }
@@ -59,6 +61,7 @@ function getInfo(){
         fetch("https://kitsu.io/api/edge"+queries[i],requestOptions)
         .then(onResponse)
         .then(result => {
+            //console.log(result);
             RESULTS_MAP[question_id[i]].title = result.data[0].attributes.canonicalTitle;
             RESULTS_MAP[question_id[i]].image = result.data[0].attributes.posterImage.medium;
             RESULTS_MAP[question_id[i]].contents = result.data[0].attributes.description;
@@ -75,6 +78,7 @@ function foxes(){
     let target = "[data-question-id='one'] [data-img-id='";
     for(let i=0;i<9;i++)
         fetch('https://randomfox.ca/floof/').then(onResponse).then(json => {
+            //console.log(json);
             document.querySelectorAll(target + i + "']")[0]
                 .src = json["image"];
         });
